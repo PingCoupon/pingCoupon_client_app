@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "603470131847",
+    "firebase_url": "https://vipchat-348fb.firebaseio.com",
+    "project_id": "vipchat-348fb",
+    "storage_bucket": "vipchat-348fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603470131847:android:4ec4cc4a94c7594f2e7e22",
+        "android_client_info": {
+          "package_name": "com.ia_vipchatting_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603470131847-q2b0oeamh51fa34eakd1gsv3kv9412t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNHWgp3l_r3PsCGBVPHT856waYVPUkbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603470131847-q2b0oeamh51fa34eakd1gsv3kv9412t6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "603470131847-b2j8dpdsat2rduupc8bojsn86h3f26ge.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vipchat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603470131847:android:73de47e7d5c6d7802e7e22",
+        "android_client_info": {
+          "package_name": "com.vipchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603470131847-for9mpljck094ahg7vf5pna1blh9b9p6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vipchat",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "603470131847-q2b0oeamh51fa34eakd1gsv3kv9412t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNHWgp3l_r3PsCGBVPHT856waYVPUkbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603470131847-q2b0oeamh51fa34eakd1gsv3kv9412t6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "603470131847-b2j8dpdsat2rduupc8bojsn86h3f26ge.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vipchat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
