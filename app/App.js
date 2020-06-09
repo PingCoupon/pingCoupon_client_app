@@ -6,9 +6,9 @@ import {store} from './src/data/store';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <AppStack />
-    </Provider>
+    // <Provider store={store}>
+    <AppStack />
+    // </Provider>
   );
 };
 
