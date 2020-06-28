@@ -1,14 +1,16 @@
 import React, {useRef, useEffect, useCallback} from 'react';
-import {Platform, PermissionsAndroid} from 'react-native';
+import {Platform, PermissionsAndroid, StatusBar, Image} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {request, PERMISSIONS} from 'react-native-permissions';
 
+import {Search} from '../assets';
 import StartScreen from './auth/startScreen';
 import LoginScreen from './auth/login';
 import SignupScreen from './auth/signup';
-import MainScreen from './main';
+import DefaultTab from './main/defaultTab';
+import Header from './main/header';
 
 const AuthStack = createStackNavigator(
   {
@@ -18,11 +20,33 @@ const AuthStack = createStackNavigator(
   {headerMode: 'none'},
 );
 
+const AppStack = createStackNavigator(
+  {
+    DefaultTab,
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitle: Header,
+      headerRight: <Image source={Search} style={{width: 17, height: 17}} />,
+      headerRightContainerStyle: {
+        marginRight: 20,
+      },
+      headerStyle: {
+        backgroundColor: '#E73757',
+        elevation: 0,
+        borderBottomWidth: 0,
+      },
+    },
+    headerMode: 'screen',
+    headerLayoutPreset: 'center',
+  },
+);
+
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: StartScreen,
-      App: MainScreen,
+      App: AppStack,
       Auth: AuthStack,
     },
     {
@@ -101,6 +125,7 @@ const App = () => {
 
   return (
     <>
+      <StatusBar barStyle="light-content" />
       <AppContainer />
     </>
   );

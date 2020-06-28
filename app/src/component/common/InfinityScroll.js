@@ -55,19 +55,30 @@ const InfinityScroll = ({
       setIsRefreshing(false);
       setRefreshing(false);
     }
-  }, [page, data, refreshing, setPeople]);
+  }, [
+    api,
+    accessToken,
+    page,
+    sort,
+    size,
+    setPeople,
+    refreshing,
+    data,
+    navigation,
+    logout,
+  ]);
 
   const handleLoadMore = useCallback(() => {
     if ((data.length !== 0 || !isRefreshing) && !empty) {
       setIsRefreshing(true);
       getData();
     }
-  }, [getData, page, data, isRefreshing, empty]);
+  }, [getData, data, isRefreshing, empty]);
   const handleRefresh = useCallback(() => {
     setRefreshing(true);
     setPage(0);
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <>
