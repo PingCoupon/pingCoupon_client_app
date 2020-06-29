@@ -1,7 +1,6 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View} from 'react-native';
 
-import {Search} from '../../../assets';
 import {Style} from './style';
 
 const Header = () => {

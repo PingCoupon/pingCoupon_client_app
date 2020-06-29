@@ -15,4 +15,13 @@ export const Style = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
+  img: {
+    margin: 6,
+    width: 17,
+    height: 17,
+  },
+  logo: {
+    width: 22,
+    height: 22,
+  },
 });

@@ -5,12 +5,13 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {request, PERMISSIONS} from 'react-native-permissions';
 
-import {Search} from '../assets';
 import StartScreen from './auth/startScreen';
 import LoginScreen from './auth/login';
 import SignupScreen from './auth/signup';
 import DefaultTab from './main/defaultTab';
 import Header from './main/header';
+import HeaderRight from './main/header/HeaderRight';
+import HeaderLeft from './main/header/HeaderLeft';
 
 const AuthStack = createStackNavigator(
   {
@@ -27,7 +28,11 @@ const AppStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerTitle: Header,
-      headerRight: <Image source={Search} style={{width: 17, height: 17}} />,
+      headerLeft: HeaderLeft,
+      headerRight: HeaderRight,
+      headerLeftContainerStyle: {
+        marginLeft: 20,
+      },
       headerRightContainerStyle: {
         marginRight: 20,
       },
