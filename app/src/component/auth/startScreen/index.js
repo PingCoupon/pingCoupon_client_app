@@ -1,5 +1,6 @@
 import React, {useEffect, useCallback, useRef} from 'react';
 import {Text, View, Image} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import * as Images from '../../../assets';
 import {StartScreenStyle} from './style';
@@ -8,7 +9,9 @@ const StartScreen = ({navigation}) => {
   const didMountRef = useRef(false);
 
   const bootstrapAsync = useCallback(async () => {
-    navigation.navigate('Auth');
+    const token = await AsyncStorage.getItem('token');
+
+    navigation.navigate(token ? 'App' : 'Auth');
   }, [navigation]);
 
   useEffect(() => {

@@ -1,7 +1,9 @@
 import React, {useState, useCallback, useEffect, useRef} from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
+import {Text, View, SafeAreaView, Image} from 'react-native';
 import Swiper from 'react-native-web-swiper';
+import Ripple from 'react-native-material-ripple';
 
+import {Search} from '../../../assets';
 import AttendanceCoupon from '../attendanceCoupon';
 import CheckCoupon from '../checkCoupon';
 import {style} from './style';
@@ -30,6 +32,12 @@ const DefaultTab = ({navigation}) => {
     }, 300);
   }, []);
 
+  const goSearch = () => {
+    setTimeout(() => {
+      navigation.navigate('Search');
+    }, 300);
+  };
+
   useEffect(() => {
     if (slideNumber === 0) {
       setTitleInfo({
@@ -49,7 +57,15 @@ const DefaultTab = ({navigation}) => {
   return (
     <SafeAreaView style={style.wrapper}>
       <View style={style.head}>
-        <Text style={style.title}>{titleInfo.title}</Text>
+        <View style={style.title}>
+          <Text style={style.titleText}>{titleInfo.title}</Text>
+          {/* <Ripple
+            onPress={goSearch}
+            rippleCentered={true}
+            rippleContainerBorderRadius={30}>
+            <Image source={Search} style={style.searchIcon} />
+          </Ripple> */}
+        </View>
         <Text style={style.subTitle}>{titleInfo.subTitle}</Text>
       </View>
       <View style={style.swiper}>
@@ -58,8 +74,8 @@ const DefaultTab = ({navigation}) => {
           minDistanceForAction={0.5}
           onIndexChanged={handleSlideNumber}
           controlsEnabled={false}>
-          <AttendanceCoupon moveToNext={moveToNext} />
-          <CheckCoupon moveToPrev={moveToPrev} />
+          <AttendanceCoupon navigation={navigation} moveToNext={moveToNext} />
+          <CheckCoupon navigation={navigation} moveToPrev={moveToPrev} />
         </Swiper>
       </View>
     </SafeAreaView>

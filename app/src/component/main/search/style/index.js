@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
   wrapper: {
     width: wp('100%'),
     height: hp('100%'),
-    backgroundColor: '#E73757',
+    backgroundColor: '#ffffff',
   },
   head: {
     width: '100%',
@@ -19,21 +19,11 @@ export const style = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
   },
-  searchIcon: {
-    margin: 6,
-    width: 17,
-    height: 17,
-  },
   swiper: {
     width: '100%',
     height: hp('88%') - Header.HEIGHT - 24,
   },
   title: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  titleText: {
     fontSize: normalize(17),
     color: '#fff',
     fontWeight: 'bold',

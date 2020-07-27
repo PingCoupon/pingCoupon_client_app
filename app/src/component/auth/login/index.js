@@ -15,15 +15,44 @@ import Ripple from 'react-native-material-ripple';
 import {PingCouponLoginBg} from '../../../assets';
 import {Background} from './style';
 import TextArea from '../TextArea';
+import {loginApi} from '../../../data/middleware/api';
+import {errorHandle} from '../../../utils/alertText';
 
 const LoginScreen = ({navigation}) => {
+  const toastRef = useRef(null);
+  const [loginError, setLoginError] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmail = useCallback(email => {
+    setEmail(email);
+  }, []);
+  const handlePassword = useCallback(password => {
+    setPassword(password);
+  }, []);
+
   const goToSignup = useCallback(() => {
     navigation.navigate('SignupScreen');
   }, [navigation]);
 
-  const signin = useCallback(() => {
-    navigation.navigate('App');
-  }, [navigation]);
+  const signin = useCallback(async () => {
+    const errorText = errorHandle({email, password});
+    if (errorText) {
+      toastRef.current.show(errorText);
+      return;
+    }
+
+    const [data, status] = await loginApi({email, password});
+
+    if (status === 200) {
+      AsyncStorage.setItem('token', data.accessToken);
+      toastRef.current.show('로그인에 성공하였습니다!', 100, () => {
+        navigation.navigate('App');
+      });
+    } else {
+      setLoginError('비밀번호가 옳바르지않습니다.');
+    }
+  }, [email, navigation, password]);
 
   return (
     <SafeAreaView style={Background.container}>
@@ -41,24 +70,26 @@ const LoginScreen = ({navigation}) => {
         <View style={Background.content}>
           <TextArea
             style={Background.textArea}
-            label="ID"
+            label="Email"
             borderColor="#e6366d"
             borderHeight={3}
             inputPadding={16}
             backgroundColor="#ffffff"
+            value={email}
+            onChange={handleEmail}
           />
           <TextArea
             isPassword={true}
-            textContentType="password"
             style={Background.textArea}
             label="PW"
             borderColor="#e6366d"
             borderHeight={3}
             inputPadding={16}
             backgroundColor="#ffffff"
+            value={password}
+            onChange={handlePassword}
           />
-          <Text style={Background.warningText}>♥︎</Text>
-          {/* 위에꺼 이런 문구 적는 곳(하트는 default값) -> 비밀번호가 틀렸습니다. */}
+          <Text style={Background.warningText}>{loginError ?? '♥︎'}</Text>
 
           <LinearGradient
             colors={['#ec9ac1', '#e92e8c']}
@@ -80,6 +111,7 @@ const LoginScreen = ({navigation}) => {
           <Text style={Background.colorText}>Sign up</Text>
         </TouchableOpacity>
       </View>
+      <Toast ref={toastRef} />
     </SafeAreaView>
   );
 };

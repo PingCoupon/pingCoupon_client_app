@@ -1,5 +1,11 @@
 import React, {useRef, useEffect, useCallback} from 'react';
-import {Platform, PermissionsAndroid, StatusBar, Image} from 'react-native';
+import {
+  Platform,
+  PermissionsAndroid,
+  StatusBar,
+  Animated,
+  Easing,
+} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -9,9 +15,34 @@ import StartScreen from './auth/startScreen';
 import LoginScreen from './auth/login';
 import SignupScreen from './auth/signup';
 import DefaultTab from './main/defaultTab';
+import Search from './main/search';
 import Header from './main/header';
-import HeaderRight from './main/header/HeaderRight';
 import HeaderLeft from './main/header/HeaderLeft';
+
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 500,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {
+      const {position, layout, scene} = sceneProps;
+      const thisSceneIndex = scene.index;
+      const width = layout.initWidth;
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [width, 0, 0],
+      });
+
+      const slideFromRight = {transform: [{translateX}]};
+
+      return slideFromRight;
+    },
+  };
+};
 
 const AuthStack = createStackNavigator(
   {
@@ -24,17 +55,20 @@ const AuthStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     DefaultTab,
+    Search: {
+      screen: Search,
+      navigationOptions: {
+        header: null,
+      },
+    },
   },
   {
+    transitionConfig,
     defaultNavigationOptions: {
       headerTitle: Header,
       headerLeft: HeaderLeft,
-      headerRight: HeaderRight,
       headerLeftContainerStyle: {
         marginLeft: 20,
-      },
-      headerRightContainerStyle: {
-        marginRight: 20,
       },
       headerStyle: {
         backgroundColor: '#E73757',
@@ -110,15 +144,9 @@ async function requestIosPermission() {
 const App = () => {
   const didMountRef = useRef(false);
 
-  const bootStrapAsync = useCallback(async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-  }, []);
-
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-
-      bootStrapAsync();
 
       if (Platform.OS === 'android') {
         requestAndroidPermission();

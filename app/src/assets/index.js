@@ -10,6 +10,10 @@ import RightBoldArrow from './right_bold_arrow.png';
 import LeftBoldArrow from './left_bold_arrow.png';
 import UpBoldArrow from './up_bold_arrow.png';
 import UpWhiteBoldArrow from './up_white_bold_arrow.png';
+import EasyIcon from './easyIcon.png';
+import NormalIcon from './normalIcon.png';
+import HardIcon from './hardIcon.png';
+import ExellentIcon from './excellentIcon.png';
 
 export {
   AttendanceActive,
@@ -24,4 +28,8 @@ export {
   UpBoldArrow,
   Search,
   UpWhiteBoldArrow,
+  EasyIcon,
+  NormalIcon,
+  HardIcon,
+  ExellentIcon,
 };

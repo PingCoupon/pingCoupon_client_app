@@ -7,7 +7,6 @@ import {normalize} from '../../../../utils/size';
 
 export const Style = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
   },
   title: {

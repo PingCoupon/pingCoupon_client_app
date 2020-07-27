@@ -11,9 +11,13 @@ const TextArea = ({
   textContentType,
   isPassword,
   style,
+  value,
+  onChange,
 }) => {
   return (
     <Hoshi
+      value={value}
+      onChangeText={onChange}
       secureTextEntry={isPassword}
       textContentType={textContentType}
       style={style}
